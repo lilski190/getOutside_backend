@@ -1,4 +1,4 @@
-## GetOutside frontend Nextjs Project
+## GetOutside Backend Nextjs Project
 #### Please use the following flow structure to commit to this repo:
 1. Checkout the develop branch, if you're not already on this branch<br/>
    `git checkout develop`<br/>
