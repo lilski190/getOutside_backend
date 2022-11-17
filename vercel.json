@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "Backend/wsgi.py",
@@ -21,7 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "projectname/wsgi.py"
+      "dest": "Backend/wsgi.py"
     }
   ]
 }
