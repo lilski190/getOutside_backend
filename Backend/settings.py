@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,22 +82,12 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    #Usere Heroku Datenbank:
-    db_from_env = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'].update(db_from_env)
-    #'default': {
-     #   'ENGINE': 'django.db.backends.postgresql',
-      #  'NAME': '',
-       # 'USER': 'gcgoeismducfve',
-      #  'PASSWORD': '703feb026dbeef52a387bb6cca489188ff4b00e03b5c6d912438e1ceae09c0d1',
-       # 'HOST': 'ec2-63-34-180-86.eu-west-1.compute.amazonaws.com',
-       # 'PORT': '5432',
-    #}
     #'default': {
      #   'ENGINE': 'django.db.backends.sqlite3',
       #  'NAME': BASE_DIR / 'db.sqlite3',
     #}
 }
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
