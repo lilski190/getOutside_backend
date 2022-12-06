@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     # our apps
     'get_outside',
     'authentication',
-    # Django Pakages
+    # Django Packages
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'rest_framework.test',
+    'pytest'
 
 ]
 
@@ -132,7 +134,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),  #
+     )
 }
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
