@@ -1,21 +1,25 @@
 from rest_framework import serializers
-
+from get_outside.serializers.commentsSerializer import CommentsSerializer
 
 """ from django.contrib.auth.models import User """
 
-from ..models.mappointModel import Mappoint
+from ..models.mappointModel import Mappoint, Images
 from ..models.categoryModel import Category
 
 
-""" # Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField()
+
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'is_staff') """
+        model = Images
+        fields = ['id', 'image', 'mappoint']
 
 
 # Serializers define the API representation.
 class MappointSerializer(serializers.ModelSerializer):
+    comments = CommentsSerializer(many=True, required=False)
+    image = ImageSerializer(many=True, required=False)
+
     class Meta:
         model = Mappoint
         fields = '__all__'
@@ -23,11 +27,10 @@ class MappointSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Mappoint.objects.create(**validated_data)
 
-
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     instance.name = validated_data.get('name', instance.name)
+    #     instance.save()
+    #     return instance
 
 
 # Serializers define the API representation.
@@ -36,11 +39,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__'     #fields = ['id','name']
+        fields = '__all__'  # fields = ['id','name']
 
     def create(self, validated_data):
         return Category.objects.create(**validated_data)
-
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)

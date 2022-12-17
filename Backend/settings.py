@@ -14,6 +14,8 @@ from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+#from django.template.context_processors import media
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-%&=-rxu((!^_=_5gplpbh+86@&c763$*0at2_l-@sznlb4p9=+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['cherrytomaten.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -43,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework.test',
-    'pytest'
+    'pytest',
 
 ]
 
@@ -134,7 +136,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-     )
+    )
 }
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
@@ -144,7 +146,7 @@ SIMPLE_JWT = {
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
-    'AUTH_HEADER_TYPES': ('JWT',),
+    'AUTH_HEADER_TYPES': ('Bearer',),
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
@@ -153,6 +155,13 @@ SIMPLE_JWT = {
 # Custom user model
 AUTH_USER_MODEL = "authentication.CustomUser"
 
-#Vercel Deployment
+#Deployment
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_URL = "/static/"
+
+# Medien Upload
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# URL used to access the media
+MEDIA_URL = '/media/'
