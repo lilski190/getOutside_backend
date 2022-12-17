@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     # Django Pakages
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-
+    'rest_framework.test',
+    'pytest',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,9 @@ AUTH_USER_MODEL = "authentication.CustomUser"
 
 # Dummy Data Settings:
 FIXTURE_DIRS = [Path(BASE_DIR, 'data'), ]
+
+# Medien Upload
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# URL used to access the media
+MEDIA_URL = '/media/'
