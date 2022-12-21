@@ -89,7 +89,9 @@ class ProfilePictureUpload(APIView):
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
 
+
     def put(self, pk, request, format=None):
+
         file = request.data['file']
         data = {
             'profile_picture': file
