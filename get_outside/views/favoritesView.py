@@ -26,7 +26,7 @@ class FavoritePinView(APIView):
         already_exists = FavoritePins.objects.filter(pin=request.data.get('pin'), user=request.user.id)
         if already_exists:
             return Response({"res": "Object already your favorite!"}, status=status.HTTP_400_BAD_REQUEST)
-        serializer = FavoritePinSerializer(data=request.data)
+        serializer = FavoritePinSerializer(data=data_request)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
