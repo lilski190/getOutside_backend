@@ -20,7 +20,7 @@ class FavoritePinView(APIView):
     def post(self, request, *args, **kwargs):#add pin to list from loggedin user
         pin = request.data.get('pin'),  # pin id
         data = {
-            'pin': pin
+            'pin': pin,
             'user': request.user.id
         }
         already_exists = FavoritePins.objects.filter(pin=request.data.get('pin'), user=request.user.id)
