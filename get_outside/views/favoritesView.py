@@ -12,6 +12,7 @@ class FavoritePinView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs): #get favorite list form loggedin user
+        print('Hallo')
         favorites = FavoritePins.objects.filter(user=request.user.id)  # favorites from that user
         serializer = FavoritePinSerializer(favorites, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
