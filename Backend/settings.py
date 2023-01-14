@@ -81,19 +81,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Backend.wsgi.application'
 
 # Database Develpopment
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+# }
 
 # Database Production
-
-#DATABASES = {
-#}
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
+DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -180,4 +176,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'get.outside.cherrytomaten@gmail.com'
-EMAIL_HOST_PASSWORD = '' #TODO: in env varablen packen
+EMAIL_HOST_PASSWORD = ''  # TODO: in env varablen packen
