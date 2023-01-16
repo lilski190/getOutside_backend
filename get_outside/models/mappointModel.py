@@ -25,7 +25,7 @@ class Mappoint(models.Model):
         ('Indoor', 'Indoor Activity'),
         ('Out & In', 'Outdoor and Indoor Activity'),
     )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #id = models.IntegerField(primary_key=True, default=key_generator, unique=True)
     title = models.CharField(max_length=30)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True)

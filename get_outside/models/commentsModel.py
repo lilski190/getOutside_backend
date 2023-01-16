@@ -14,7 +14,7 @@ def key_generator():
 
 
 class Comment(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #id = models.IntegerField(primary_key=True, default=key_generator, unique=True)
     mappoint_id = models.ForeignKey(Mappoint, related_name='comments', default=0, on_delete=models.CASCADE)
     author_id = models.ForeignKey(CustomUser, null=True, on_delete=models.CASCADE)  # oder SET() ???
