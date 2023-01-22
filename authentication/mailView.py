@@ -111,8 +111,8 @@ class ResetPassword(APIView):
             user.is_active = True
             # password change here in serializer, find old password first
             data = {
-                'password':  request.data('password'),
-                'password2': request.data('password2'),
+                'password':  request.data.get('password'),
+                'password2': request.data.get('password2'),
                 'old_password': user.password
             }
             serializer = ChangePasswordSerializer(data)
