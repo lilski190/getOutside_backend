@@ -112,7 +112,7 @@ class ResetPassword(APIView):
                 'password':  request.data('password'),
                 'password2': request.data('password2'),
             }
-            serializer = ResetPasswordSerializer(data)
+            serializer = ResetPasswordSerializer(data=data)
             if serializer.is_valid():
                 user = serializer.save()
                 if user:
