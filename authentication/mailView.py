@@ -96,11 +96,11 @@ class ResetPassword(APIView):
             return Response({'error': 'user with this email not found!'}, status=400)
 
     def put(self, request):
-        token = request.PUT.get('confirmation_token')
+        token = request.data.get('confirmation_token')
         # token = request.data.get('confirmation_token')
         print(token)
-        user_id = request.PUT.get('user_id')
-        user_mail = request.PUT.get('user_mail')
+        user_id = request.data.get('user_id')
+        user_mail = request.data.get('user_mail')
         # user_id = request.data('user_id')
         print(user_mail)
         try:
