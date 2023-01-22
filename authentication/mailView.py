@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from authentication.models import CustomUser
-from authentication.serializers import ChangePasswordSerializer
+from authentication.serializers import ResetPasswordSerializer
 from authentication.token import account_activation_token
 
 
@@ -50,8 +50,8 @@ class ActivateUser(APIView):
         confirmation_token = request.GET.get('confirmation_token')
         # token = request.data.get('confirmation_token')
         print(confirmation_token)
-        user_id = request.GET.get('user_id')
-        user_mail = request.GET.get('user_mail')
+        user_id = request.data.get('user_id')
+        user_mail = request.data.get('user_mail')
         # user_id = request.data('user_id')
         print(user_mail)
         try:
@@ -96,13 +96,11 @@ class ResetPassword(APIView):
             return Response({'error': 'user with this email not found!'}, status=400)
 
     def put(self, request):
-        token = request.GET.get('confirmation_token')
+        token = request.data.get('confirmation_token')
         # token = request.data.get('confirmation_token')
-        print(token)
-        user_id = request.GET.get('user_id')
-        user_mail = request.GET.get('user_mail')
+        user_id = request.data.get('user_id')
+        user_mail = request.data.get('user_mail')
         # user_id = request.data('user_id')
-        print(user_mail)
         try:
             user = CustomUser.objects.get(email=user_mail)
         except CustomUser.DoesNotExist:
@@ -113,9 +111,8 @@ class ResetPassword(APIView):
             data = {
                 'password':  request.data('password'),
                 'password2': request.data('password2'),
-                'old_password': user.password
             }
-            serializer = ChangePasswordSerializer(data)
+            serializer = ResetPasswordSerializer(data)
             if serializer.is_valid():
                 user = serializer.save()
                 if user:
