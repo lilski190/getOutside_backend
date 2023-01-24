@@ -32,11 +32,11 @@ class MappointViewSet(APIView):
         data_request = JSONParser().parse(request)
         serializer = MappointSerializer(data=data_request)
         if serializer.is_valid():
-            activity = serializer.save()
-            if activity:
+            point = serializer.save(creator_id=self.request.user.id)
+            if point:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
-            return Response(json, status=status.HTTP_406_NOT_ACCEPTABLE)
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format='json'):

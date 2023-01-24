@@ -5,10 +5,8 @@ from authentication.models import CustomUser
 from get_outside.models.mappointModel import Mappoint
 
 
-class Comment(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
-    mappoint_id = models.ForeignKey(Mappoint, related_name='comments', default=0, on_delete=models.CASCADE)
-    author_id = models.ForeignKey(CustomUser, null=True, on_delete=models.CASCADE)  # oder SET() ???
+    mappointPin = models.ForeignKey(Mappoint, related_name='comments', default=0, db_constraint=False, on_delete= models.CASCADE)
+    author = models.ForeignKey(CustomUser, null=True, on_delete=models.CASCADE, db_constraint=False) 
     created_at = models.DateTimeField(auto_now=True)
     text = models.CharField(max_length=255, blank=True)
 
