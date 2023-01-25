@@ -41,7 +41,7 @@ wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wech
 python . activate  
 (Leerzeichen ist wichtig)
 
-2. Abhängikeiten installieren  
+2. Abhängigkeiten installieren  
 pip install -r ./requirements.txt
 
 3. to make sure all migrations are correct:  
