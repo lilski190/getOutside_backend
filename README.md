@@ -43,7 +43,7 @@ Oder per Settings der IDE. Je nach IDE variiert der Pfad. Zum Beispiel unter get
 wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wechsel und so zu aktivieren:  
 > `python . activate` (Leerzeichen ist wichtig)
 
-3. Abhängikeiten installieren  
+3. Abhängigkeiten installieren  
 > `pip install -r ./requirements.txt`
 
 5. to make sure all migrations are correct:  
