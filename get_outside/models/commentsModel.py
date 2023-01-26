@@ -5,7 +5,6 @@ from django.db import models
 from authentication.models import CustomUser
 from get_outside.models.mappointModel import Mappoint
 
-
 def key_generator():
     key = randrange(100, 100000)
     if CustomUser.objects.filter(id=key).exists():
