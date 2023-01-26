@@ -2,7 +2,7 @@ from rest_framework import serializers
 """ from django.contrib.auth.models import User """
 from ..models.categoryModel import Category
 from ..models.mappointModel import Mappoint, Images, Ratings
-from get_outside.serializers.commentsSerializer import CommentsSerializer
+from get_outside.serializers.commentSerializer import CommentsSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
