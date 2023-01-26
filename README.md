@@ -31,6 +31,7 @@ A little intro about the installation.
 
 ## Start des Projekts
 
+
 1. Virtual Environment. Einen Ordner für virtual Environment anlegen. 
 Entweder per Console:  
 > `python -m venv venv`  
@@ -55,6 +56,7 @@ wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wech
 
 ## Abhängigkeiten
 Alle Abhängigkeiten werden beim Starten des Projekts mit den requirements installiert. 
+
 
 ## Tools
 Tools, die wir im Backend verwendet haben sind: 
