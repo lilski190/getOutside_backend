@@ -30,8 +30,6 @@ A little intro about the installation.
 > `cd ../path/to/the/file`
 
 ## Start des Projekts
-
-
 1. Virtual Environment. Einen Ordner für virtual Environment anlegen. 
 Entweder per Console:  
 > `python -m venv venv`  
@@ -68,3 +66,4 @@ Tools, die wir im Backend verwendet haben sind:
    - git (GitHub, Versionskontrolle)
    - HTTPie, cURL (Programmbibliothek und ein Kommandozeilen-Programm (CLI) zum Testen) 
    - pytest (Test Framework)
+

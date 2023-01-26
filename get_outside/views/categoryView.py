@@ -12,8 +12,8 @@ from django.shortcuts import get_object_or_404
 # ViewSets define the view behavior. Only Admin can CRUD Category
 class CategoryViewSet(APIView):
     get_serializer= CategorySerializer
-
     permission_classes = (IsAdminUser,)
+
     def detail_view(self, id):
         try:
             return get_object_or_404(Category, id=id)
@@ -42,9 +42,8 @@ class CategoryViewSet(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoryViewSet2(APIView):
-    permission_classes = (IsAuthenticated,)
-
     permission_classes = (IsAdminUser,)
+    
     def put(self, request, pk , format='json'):
         object = get_object_or_404(Category, pk=pk)
         data_request = JSONParser().parse(request)
@@ -64,5 +63,4 @@ class CategoryViewSet2(APIView):
     def delete(self, request, pk, format='json'):
         deleteItem = get_object_or_404(Category, pk=pk)
         deleteItem.delete()
-        return Response(
-        status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
