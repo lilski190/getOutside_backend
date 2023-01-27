@@ -45,7 +45,7 @@ wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wech
 3. Abhängigkeiten installieren  
 > `pip install -r ./requirements.txt`
 
-5. to make sure all migrations are correct:  
+4. to make sure all migrations are correct:  
 > `python manage.py makemigrations` 
 > `python manage.py migrate` 
 
@@ -66,4 +66,3 @@ Tools, die wir im Backend verwendet haben sind:
    - git (GitHub, Versionskontrolle)
    - HTTPie, cURL (Programmbibliothek und ein Kommandozeilen-Programm (CLI) zum Testen) 
    - pytest (Test Framework)
-

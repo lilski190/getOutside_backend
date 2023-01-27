@@ -38,7 +38,6 @@ class Mappoint(models.Model):
     longitude = models.FloatField(max_length=10)
     latitude = models.FloatField(max_length=10)
     creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True) 
-    
 
     def __str__(self):
         return self.title
