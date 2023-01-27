@@ -14,6 +14,7 @@ urlpatterns = [
     
     path('mappoint/rating', RatingViewSet.as_view()),
     path('mappoint/rating/<str:pk>', RatingViewSet.as_view()),
+    path('mappoint/rating/<int:pk>', RatingViewSet.as_view()),
     
     path('favorites/pin/', FavoritePinView.as_view(), name='favoritePin'),
 
