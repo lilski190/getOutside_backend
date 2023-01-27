@@ -36,16 +36,22 @@ Entweder per Console:
 
 Oder per Settings der IDE. Je nach IDE variiert der Pfad. Zum Beispiel unter getOutside_backend oder getOutside_backend/Backend "venv" anlegen.
 
-2. Dann virtual Environment activieren mit:  
-> `python venv\Scripts\activate`  
+2. Dann virtual Environment aktivieren.  
 
+# In PowerShell (Windows)
+> `venv\Scripts\Activate.ps1`
+oder:
+> `python venv\Scripts\activate`  
 wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wechsel und so zu aktivieren:  
 > `python . activate` (Leerzeichen ist wichtig)
+
+# Linux oder MacOS 
+> $ source myvenv/bin/activate
 
 3. Abhängigkeiten installieren  
 > `pip install -r ./requirements.txt`
 
-4. to make sure all migrations are correct:  
+4. Um sicherzugehen, dass alle migrations in Ordnung sind:  
 > `python manage.py makemigrations` 
 > `python manage.py migrate` 
 
