@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             name='Mappoint',
             fields=[
                 ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=30)),
+                ('title', models.CharField(max_length=100)),
                 ('address', models.TextField()),
                 ('created', models.DateTimeField(auto_now=True)),
                 ('notes', models.CharField(choices=[('Outdoor', 'Outdoor Activity'), ('Indoor', 'Indoor Activity'), ('Out & In', 'Outdoor and Indoor Activity')], default='Outdoor', max_length=100)),
@@ -37,13 +37,21 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('longitude', models.FloatField(max_length=10)),
                 ('latitude', models.FloatField(max_length=10)),
-                ('ratings', models.FloatField(max_length=20)),
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='get_outside.category')),
                 ('creator', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ['-created'],
             },
+        ),
+        migrations.CreateModel(
+            name='Ratings',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('rating', models.IntegerField(blank=True, null=True)),
+                ('creator_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('mappoint', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='rating', to='get_outside.mappoint')),
+            ],
         ),
         migrations.CreateModel(
             name='Images',

@@ -4,8 +4,8 @@ from random import randrange
 
 from django.db import models
 
-from Backend import settings
 from authentication.models import CustomUser
+from Backend import settings
 
 
 def key_generator():
@@ -26,9 +26,8 @@ class Mappoint(models.Model):
         ('Out & In', 'Outdoor and Indoor Activity'),
     )
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    #id = models.IntegerField(primary_key=True, default=key_generator, unique=True)
-    title = models.CharField(max_length=30)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True) #default=0
+    title = models.CharField(max_length=100)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True) 
     address = models.TextField()
     created = models.DateTimeField(auto_now=True)
     # end = models.DateTimeField()
@@ -39,7 +38,6 @@ class Mappoint(models.Model):
     longitude = models.FloatField(max_length=10)
     latitude = models.FloatField(max_length=10)
     creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True) 
-    ratings = models.FloatField(max_length=20)
 
     def __str__(self):
         return self.title
@@ -61,3 +59,11 @@ class Images(models.Model):
     def delete(self, *args, **kwargs):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.image.name))
         super(Images, self).delete(*args, **kwargs)
+
+class Ratings(models.Model):
+    rating = models.IntegerField(blank=True, null=True,)
+    mappoint = models.ForeignKey('Mappoint', related_name='rating', on_delete=models.CASCADE,)
+    creator_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.id

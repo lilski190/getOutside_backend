@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from rest_framework import permissions, status
@@ -19,7 +20,8 @@ class CommentsViewSet(APIView):
         print(request)
         serializer = CommentsSerializer(data=data_request)
         if serializer.is_valid():
-            comment = serializer.save(author_id=self.request.user.id, mappointPin_id=self.request.uuid)    
+            comment = serializer.save(author_id=self.request.user.id) #, mappointPin_id=mappoint)    
+
             if comment:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
@@ -36,10 +38,10 @@ class CommentsViewSet(APIView):
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-    def get(self, request):
-        comment = Comment.objects.all()
+    def get(self, request, pk):
+        comment = Comment.objects.all().filter(mappointPin_id=pk)
         serializer = CommentsSerializer(comment, many=True)
         if comment:
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return HttpResponse("id not found / no authorization")
+            return HttpResponse("Mappoint id not found / no authorization")

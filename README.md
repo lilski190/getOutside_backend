@@ -30,8 +30,6 @@ A little intro about the installation.
 > `cd ../path/to/the/file`
 
 ## Start des Projekts
-
-
 1. Virtual Environment. Einen Ordner für virtual Environment anlegen. 
 Entweder per Console:  
 > `python -m venv venv`  
@@ -44,7 +42,7 @@ Oder per Settings der IDE. Je nach IDE variiert der Pfad. Zum Beispiel unter get
 wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wechsel und so zu aktivieren:  
 > `python . activate` (Leerzeichen ist wichtig)
 
-2. Abhängigkeiten installieren  
+3. Abhängigkeiten installieren  
 > `pip install -r ./requirements.txt`
 
 4. to make sure all migrations are correct:  
