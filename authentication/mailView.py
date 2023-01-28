@@ -47,7 +47,7 @@ class ActivateUser(APIView):
 
     def get(self, request):
         print('Activate account :)')
-        confirmation_token = request.GET.get('confirmation_token')
+        confirmation_token = request.data.get('confirmation_token')
         # token = request.data.get('confirmation_token')
         print(confirmation_token)
         user_id = request.data.get('user_id')
