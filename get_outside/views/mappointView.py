@@ -15,7 +15,7 @@ from get_outside.serializers.serializers import ImageSerializer, MappointSeriali
 
 # ViewSets define the view behavior.
 class MappointViewSet(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def detail_view(self, pk):
         try:
@@ -36,7 +36,7 @@ class MappointViewSet(APIView):
         data_request = JSONParser().parse(request)
         serializer = MappointSerializer(data=data_request)
         if serializer.is_valid():
-            point = serializer.save() #creator_id=self.request.user.id)
+            point = serializer.save()
             if point:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
