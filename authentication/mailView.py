@@ -13,7 +13,7 @@ class ConfirmEmail(APIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
-        activate_link_url = 'https://www.get-outside-app.de/confirm-email'  # TODO: Frontend route zum aktivieren
+        activate_link_url = 'https://www.get-outside-app.de/confirm-email' 
         email = request.data.get('email')
         print(email)
         if not email:
@@ -72,7 +72,7 @@ class ResetPasswordMail(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        activate_link_url = 'https://www.get-outside-app.de/reset-password'  # TODO: Frontend route zum aktivieren
+        activate_link_url = 'https://www.get-outside-app.de/reset-password' 
         email = request.data.get('email')
         if not email:
             return Response({'error': 'email is empty'}, status=400)
