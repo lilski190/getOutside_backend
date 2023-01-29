@@ -68,7 +68,8 @@ class ActivateUser(APIView):
 
 
 class ResetPasswordMail(APIView):
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
+    permission_classes = [AllowAny]
 
     def post(self, request):
         activate_link_url = 'https://www.get-outside-app.de/reset-password'  # TODO: Frontend route zum aktivieren
@@ -97,7 +98,8 @@ class ResetPasswordMail(APIView):
 
 
 class ResetPassword(APIView):
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
+    permission_classes = [AllowAny]
 
     def post(self, request):
         token = request.data.get('confirmation_token')
