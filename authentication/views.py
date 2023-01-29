@@ -95,7 +95,19 @@ class ProfilePictureUpload(APIView):
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
 
-    def put(self, request, format=None):
+    def get_object(self, pk):
+        try:
+            return CustomUser.objects.get(uuid=pk)
+        except CustomUser.DoesNotExist:
+            return None
+
+    def put(self, request, pk, format=None):
+        user_instance = self.get_object(pk)
+        if not user_instance:
+            return Response(
+                {"res": "User with pk does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         file = request.data['file']
         data = {
             'profile_picture': file
