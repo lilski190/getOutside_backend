@@ -16,6 +16,6 @@ urlpatterns = [
     path('user/upload/<int:pk>', ProfilePictureUpload.as_view(), name="uploadProfilePicture"),
     path('user/confirm-email/', ConfirmEmail.as_view(), name="confirmEmail"),
     path('user/activate/', ActivateUser.as_view(), name="activateUser"),
-    path('user/password/sendMail/', ResetPasswordMail.as_view(), name="resetPasswordMail"),
-    path('user/password/reset/', ResetPassword.as_view(), name="resetPassword")
+    path('user/password/sendMail', ResetPasswordMail.as_view(), name="resetPasswordMail"),
+    path('user/password/reset', ResetPassword.as_view(), name="resetPassword")
 ]
