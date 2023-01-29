@@ -67,7 +67,7 @@ class ActivateUser(APIView):
             return Response({'msg': 'Activation link is invalid!'}, status=400)
 
 
-class ResetPassword(APIView):
+class ResetPasswordMail(APIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
@@ -95,8 +95,11 @@ class ResetPassword(APIView):
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
 
-    def put(self, request):
 
+class ResetPassword(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
         token = request.data.get('confirmation_token')
         # token = request.data.get('confirmation_token')
         user_id = request.data.get('user_id')
@@ -110,7 +113,7 @@ class ResetPassword(APIView):
             user.is_active = True
             # password change here in serializer, find old password first
             data = {
-                'password':  request.data.get('password'),
+                'password': request.data.get('password'),
                 'password2': request.data.get('password2'),
             }
             serializer = ResetPasswordSerializer(data=data)
