@@ -47,7 +47,7 @@ class MappointViewSet(APIView):
         object = get_object_or_404(Mappoint, pk=pk)
         data_request = JSONParser().parse(request)
         # Passing partial will allow us to update without passing the entire Todo object
-        serializer= MappointSerializer(instance = object, data=data_request, partial=True)
+        serializer = MappointSerializer(instance=object, data=data_request, partial=True)
         if serializer.is_valid():
             activity = serializer.save()
             if activity:
@@ -55,8 +55,7 @@ class MappointViewSet(APIView):
                 return Response(json, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-    def delete(self,request, pk, format='json'):
+    def delete(self, request, pk, format='json'):
         deleteItem = get_object_or_404(Mappoint, pk=pk)
         deleteItem.delete()
         return Response(
@@ -100,6 +99,7 @@ class UploadImage(APIView):
             status=status.HTTP_200_OK
         )
 
+
 class RatingViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -116,8 +116,7 @@ class RatingViewSet(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk):
-        # pk = id vom Mappoint
-        if pk:  
+        if pk:
             try:
                 average = Ratings.objects.all().filter(mappoint=pk).aggregate(Avg('rating'))
                 print(average)
@@ -131,7 +130,7 @@ class RatingViewSet(APIView):
         # pk = id vom Rating selber
         rating = get_object_or_404(Ratings, pk=pk)
         ratingCreator = rating.creator
-        user_id = self.request.user.id
+        user_id = self.request.user.uuid
         if user_id == ratingCreator:
             rating.delete()
             return Response(status=status.HTTP_200_OK)

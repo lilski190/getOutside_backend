@@ -11,11 +11,11 @@ urlpatterns = [
     path('mappoint', MappointViewSet.as_view()),
     path('mappoint/<str:pk>', MappointViewSet.as_view()),
     path('mappoint/upload/<str:pk>', UploadImage.as_view()),
-    
+
     path('rating/mappoint', RatingViewSet.as_view()),
     path('rating/mappoint/<str:pk>', RatingViewSet.as_view()),
-    path('rating/mappoint/<int:pk>', RatingViewSet.as_view()),
-    
+    # path('rating/mappoint/<int:pk>', RatingViewSet.as_view()),
+
     path('favorites/pin/', FavoritePinView.as_view(), name='favoritePin'),
 
     path('mappoint/detail/comments/<str:pk>', CommentsViewSet.as_view()),
