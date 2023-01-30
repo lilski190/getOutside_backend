@@ -1,5 +1,3 @@
-
-
 """
 Django settings for Backend project. 
 
@@ -14,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 import dj_database_url
 import environ
+import cloudinary
+
 from datetime import timedelta
 from pathlib import Path
 
@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'pytest',
     'corsheaders',
     'six',
+    'cloudinary_storage',
+    'cloudinary',
+
 ]
 
 MIDDLEWARE = [
@@ -203,3 +206,11 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('CLOUD_API_KEY'),
+    'API_SECRET': env('CLOUD_API_SECRET'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

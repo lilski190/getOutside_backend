@@ -1,3 +1,4 @@
+import cloudinary
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from rest_framework.generics import UpdateAPIView
@@ -7,7 +8,7 @@ from rest_framework import status, permissions, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 from Backend import settings
 from .models import CustomUser
@@ -92,8 +93,18 @@ class ProfilePictureUpload(UpdateAPIView):
 
 
 class ProfilePictureUpload(APIView):
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        file = request.data.get('file')
+
+        upload_data = cloudinary.uploader.upload(file)
+        return Response({
+            'status': 'success',
+            'data': upload_data,
+        }, status=201)
+
 
     def get_object(self, pk):
         try:
