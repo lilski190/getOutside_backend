@@ -17,11 +17,10 @@ class ImageSerializer(serializers.ModelSerializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    rating = serializers.FloatField()
 
     class Meta:
         model = Ratings
-        fields = ['id', 'rating', 'mappoint', 'creator']
+        fields = '__all__'
 
 
 # Serializers define the API representation.

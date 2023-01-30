@@ -103,10 +103,23 @@ class UploadImage(APIView):
 class RatingViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, pk, *args, **kwargs): # pk = mappointid
+        object = get_object_or_404(Mappoint, pk=pk)
         # es wird übergeben: rating, mappoint_id und user_id
-        data_request = JSONParser().parse(request)
-        serializer = RatingSerializer(data=data_request)
+        # data_request = JSONParser().parse(request)
+        # pin_id = request.data.get('mappoint')  # pin id
+        rating = request.data.get('rating')
+        already_exists = Ratings.objects.filter(mappoint=object, creator=request.user)
+        if rating > 5:
+            return Response({'err': 'rating to high'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        if already_exists:
+            already_exists.delete()
+        data = {
+            'mappoint': pk,
+            'rating': rating,
+            'creator': request.user.uuid,
+        }
+        serializer = RatingSerializer(data=data)
         if serializer.is_valid():
             value = serializer.save()
             if value:
@@ -126,6 +139,7 @@ class RatingViewSet(APIView):
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
+'''
     def delete(self, request, pk):
         # pk = id vom Rating selber
         rating = get_object_or_404(Ratings, pk=pk)
@@ -135,3 +149,4 @@ class RatingViewSet(APIView):
             rating.delete()
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_401_UNAUTHORIZED)
+'''
