@@ -110,8 +110,8 @@ class RatingViewSet(APIView):
         # pin_id = request.data.get('mappoint')  # pin id
         rating = request.data.get('rating')
         already_exists = Ratings.objects.filter(mappoint=object, creator=request.user)
-        if rating > 5:
-            return Response({'err': 'rating to high'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        if rating > 5 or rating < 0:
+            return Response({'err': 'rating not in the range of 0-5'}, status=status.HTTP_406_NOT_ACCEPTABLE)
         if already_exists:
             already_exists.delete()
         data = {
