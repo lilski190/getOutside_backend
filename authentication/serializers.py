@@ -57,7 +57,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['uuid', 'profile_picture']
+        fields = ['username', 'first_name', 'last_name', 'email', 'profile_picture']
+
+
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
