@@ -97,7 +97,7 @@ class ProfilePictureUpload(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        file = request.data.get('file')
+        file = request.data['file']
 
         upload_data = cloudinary.uploader.upload(file)
         return Response({
