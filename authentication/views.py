@@ -108,11 +108,12 @@ class ProfilePictureUpload(APIView):
                 {"res": "User with pk does not exists"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        file = request.data['file']
+        # file = request.data['file']
         data = {
+            'uuid': request.user.uuid,
             'profile_picture': request.data
         }
-        serializer = UserSerializer(instance=request.user, data=data, partial=True)
+        serializer = UserSerializer(data=data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

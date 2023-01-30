@@ -53,11 +53,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    profile_picture = serializers.ImageField(required=False)
+    profile_picture = serializers.ImageField()
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'first_name', 'last_name', 'email', 'profile_picture']
+        fields = ['uuid', 'profile_picture']
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
