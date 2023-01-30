@@ -110,7 +110,7 @@ class ProfilePictureUpload(APIView):
             )
         # file = request.data['file']
         data = {
-            'uuid': request.user.uuid,
+           # 'uuid': request.user.uuid,
             'profile_picture': request.data
         }
         serializer = UserSerializer(data=data, partial=True)
