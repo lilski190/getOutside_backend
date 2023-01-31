@@ -158,7 +158,7 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ["profile_picture"]
 
-    def save(self, *args, **kwargs):
-        if self.instance.profile_picture:
-            self.instance.profile_picture.delete()
-        return super().save(*args, **kwargs)
+  #  def save(self, *args, **kwargs):
+   #     if self.instance.profile_picture:
+    #        self.instance.profile_picture.delete()
+     #   return super().save(*args, **kwargs)
