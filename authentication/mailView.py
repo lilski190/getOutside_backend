@@ -38,13 +38,13 @@ class ConfirmEmail(APIView):
             html_version = 'templates/confirmationMail.html'
             html_message = render_to_string(html_version, { 'user': user.username, 'link': link })
             #emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com', [email])
-            #emailmessage.content_subtype = "html" 
+            html_message.content_subtype = "html" 
             #email.send()
             sent_mail = send_mail(  # email senden
-                 subject,
-                 html_message,
-                 'get_outside.cherrytomaten@gmail.com',
-                  [email]
+                subject,
+                'get_outside.cherrytomaten@gmail.com',
+                [email],
+                html_message= html_message,
              )
             return Response({'msg': sent_mail}, status=200)
         else:
