@@ -40,7 +40,9 @@ class ConfirmEmail(APIView):
                 }
             
             temp= 'templates\confirmationMail.html'
+            print(temp)
             htmlmessage = render_to_string(temp, context)
+            print(htmlmessage)
             # emailmessage = EmailMessage(subject, htmlmessage, from_email='get_outside.cherrytomaten@gmail.com', to=[email])
             # emailmessage.content_subtype = "html" 
             # m=emailmessage.send()
