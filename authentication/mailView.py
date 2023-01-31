@@ -43,7 +43,7 @@ class ConfirmEmail(APIView):
                 'link': link
                 }
 
-            message = render_to_string('authentication/templates/confirmationMail.html', context)
+            htmlmessage = render_to_string('authentication/templates/confirmationMail.html', context)
             text = render_to_string('authentication/templates/confirmationMail.txt', context)
            # emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com', [email])
             #emailmessage.content_subtype = "html" 
@@ -55,7 +55,7 @@ class ConfirmEmail(APIView):
             sent_mail = send_mail(  # email senden
                 subject,
                 message=text,
-                html_message=message,
+                html_message=htmlmessage,
                 recipient_list=[email],
                 from_email= 'get_outside.cherrytomaten@gmail.com'
              )
