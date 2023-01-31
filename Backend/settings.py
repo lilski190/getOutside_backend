@@ -82,7 +82,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'templates',
+                'templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -96,9 +97,6 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
 
 WSGI_APPLICATION = 'Backend.wsgi.application'
 

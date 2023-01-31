@@ -3,8 +3,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-# from django.template.loader import render_to_string
-# from django.template import loader
+from django.template.loader import render_to_string
 
 
 from authentication.models import CustomUser
@@ -40,7 +39,7 @@ class ConfirmEmail(APIView):
                 'link': link
                 }
 
-            # html_message = loader.render_to_string('templates\confirmationMail.html',context)
+            html_message = render_to_string('confirmationMail.html',context)
             # temp= 'templates\confirmationMail.html'
             # print(temp)
             # htmlmessage = render_to_string(temp, context)
