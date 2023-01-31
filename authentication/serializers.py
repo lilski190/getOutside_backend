@@ -153,8 +153,12 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
 
 class ProfilePictureSerializer(serializers.ModelSerializer):
-    profile_picture = serializers.ImageField()
 
     class Meta:
         model = CustomUser
-        fields = ["id", "profile_picture"]
+        fields = ["profile_picture"]
+
+    def save(self, *args, **kwargs):
+        if self.instance.profile_picture:
+            self.instance.profile_picture.delete()
+        return super().save(*args, **kwargs)

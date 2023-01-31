@@ -99,12 +99,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Backend.wsgi.application'
 
 # Database Development #TODO: IN env variablen reinpacken
-# DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3', }}
+DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3', }}
 
 # Database Production
-DATABASES = {
-}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+#DATABASES = {
+#}
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 '''
 DATABASES = {
@@ -210,7 +210,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 # Cloudinary settings
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': env('CLOUD_NAME'),
-    'API_KEY': env('CLOUD_API_KEY'),
+    'API_KEY': '531176112771525',
     'API_SECRET': env('CLOUD_API_SECRET'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
