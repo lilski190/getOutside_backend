@@ -52,3 +52,16 @@ class CategorySerializer(serializers.ModelSerializer):
         instance.id = validated_data.get('id', instance.id)
         instance.save()
         return instance
+
+
+class UploadImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Images
+        fields = ["cloud_pic"]
+
+    def update(self, instance, validated_data):
+        instance.cloud_pic = validated_data['cloud_pic']
+        instance.save()
+
+        return instance

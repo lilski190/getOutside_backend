@@ -10,12 +10,13 @@ from django.shortcuts import get_object_or_404
 
 from get_outside.models.RatingsModel import Ratings
 from get_outside.models.mappointModel import Images, Mappoint
-from get_outside.serializers.serializers import ImageSerializer, MappointSerializer, RatingSerializer
+from get_outside.serializers.serializers import ImageSerializer, MappointSerializer, RatingSerializer, \
+    UploadImageSerializer
 
 
 # ViewSets define the view behavior.
 class MappointViewSet(APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def detail_view(self, pk):
         try:
@@ -65,8 +66,10 @@ class MappointViewSet(APIView):
 class UploadImage(APIView):
     queryset = Images.objects.all()
     permission_classes = (IsAuthenticated,)
-    parser_classes = (MultiPartParser, FormParser)
+    serializer_class = UploadImageSerializer
 
+
+'''
     def post(self, request, pk, *args, **kwargs):
         file = request.data['file']
         data = {
@@ -98,12 +101,13 @@ class UploadImage(APIView):
             {"res": "Object deleted!"},
             status=status.HTTP_200_OK
         )
+'''
 
 
 class RatingViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, pk, *args, **kwargs): # pk = mappointid
+    def post(self, request, pk, *args, **kwargs):  # pk = mappointid
         object = get_object_or_404(Mappoint, pk=pk)
         # es wird übergeben: rating, mappoint_id und user_id
         # data_request = JSONParser().parse(request)
@@ -138,6 +142,7 @@ class RatingViewSet(APIView):
                 return None
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
 
 '''
     def delete(self, request, pk):

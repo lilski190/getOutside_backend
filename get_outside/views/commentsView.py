@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from rest_framework import permissions, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -14,7 +15,7 @@ from get_outside.models.commentsModel import Comment
 
 # ViewSets define the view behavior.
 class CommentsViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         pin_id = request.data.get('mappointID')  # pin id
