@@ -134,10 +134,11 @@ class ResetPassword(APIView):
         # user_id = request.data('user_id')
         try:
             user = CustomUser.objects.get(email=user_mail)
+            user.is_active = True
         except CustomUser.DoesNotExist:
             user = None
         if user is not None and account_activation_token.check_token(user, token):
-            user.is_active = True
+           # user.is_active = True
             # password change here in serializer, find old password first
             data = {
                 'password': request.data.get('password'),
@@ -151,5 +152,5 @@ class ResetPassword(APIView):
                     return Response(json, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            user.is_active = True
+          #  user.is_active = True
             return Response({'msg': 'Reset link is invalid!'}, status=400)

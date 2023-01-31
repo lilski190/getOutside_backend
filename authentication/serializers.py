@@ -102,7 +102,9 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
         fields = ('password', 'password2')
 
     def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
+        password = attrs.get('password')
+        password2 = attrs.pop('password2')
+        if password != password2:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return attrs
 
@@ -157,6 +159,13 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ["profile_picture"]
+
+    def update(self, instance, validated_data):
+        instance.profile_picture = validated_data
+        instance.save()
+        return instance
+
+
 
   #  def save(self, *args, **kwargs):
    #     if self.instance.profile_picture:
