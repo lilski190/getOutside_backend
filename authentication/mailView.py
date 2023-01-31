@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.template.loader import render_to_string
+from django.template import loader
 
 
 from authentication.models import CustomUser
@@ -33,30 +34,25 @@ class ConfirmEmail(APIView):
 
             subject = "Welcome to GetOutside :)"
             text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
-
+            
             context={
                 'user': user.username,
                 'link': link
                 }
+
+            html_message = loader.render_to_string('templates\confirmationMail.html',context)
+
             
-            temp= 'templates\confirmationMail.html'
-            print(temp)
-            htmlmessage = render_to_string(temp, context)
-            print(htmlmessage)
-            # emailmessage = EmailMessage(subject, htmlmessage, from_email='get_outside.cherrytomaten@gmail.com', to=[email])
-            # emailmessage.content_subtype = "html" 
-            # m=emailmessage.send()
-            # if m:
-            #     return Response(status=200)#{'msg': sent_mail}, status=200)
-            # else:
-            #       return Response(status=400)
-
-
+            # temp= 'templates\confirmationMail.html'
+            # print(temp)
+            # htmlmessage = render_to_string(temp, context)
+            # print(htmlmessage)
             sent_mail = send_mail(  # email senden
                 subject,
+                message="Thank you for joining getOutside.We’d like to confirm that your account was created successfully. To access your account click the Link below.", 
                 recipient_list=[email],
                 from_email= 'get_outside.cherrytomaten@gmail.com',
-                html_message = htmlmessage
+                html_message = html_message
              )
             if sent_mail:
                  return Response(status=200)#{'msg': sent_mail}, status=200)
