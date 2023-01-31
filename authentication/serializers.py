@@ -159,7 +159,7 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
         fields = ["profile_picture"]
 
     def update(self, instance, validated_data):
-        instance.profile_picture = validated_data["profile_picture"]
+        instance.profile_picture = validated_data
         instance.save()
         return instance
 
