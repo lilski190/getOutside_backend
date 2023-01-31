@@ -35,16 +35,14 @@ class ConfirmEmail(APIView):
 
             subject = "Welcome to GetOutside :)"
             text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
-            # import file with html content
-            html_version = 'confirmationMail.html'
 
             context={
                 'user': user.username,
                 'link': link
                 }
-
-            htmlmessage = render_to_string('templates/confirmationMail.html', context)
-            # text = render_to_string('authentication/templates/confirmationMail.txt', context)
+            
+            temp= 'templates\confirmationMail.html'
+            htmlmessage = render_to_string(temp, context)
             emailmessage = EmailMessage(subject, htmlmessage, from_email='get_outside.cherrytomaten@gmail.com', to=[email])
             emailmessage.content_subtype = "html" 
             m=emailmessage.send()
