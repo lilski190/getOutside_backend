@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.template.loader import render_to_string 
 from django.core.mail import EmailMessage
+from django.template import Context
 
 
 from authentication.models import CustomUser
@@ -36,7 +37,8 @@ class ConfirmEmail(APIView):
             text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
             # import file with html content
             html_version = 'confirmationMail.html'
-            html_message = render_to_string(html_version, { 'user': user.username, 'link': link })
+            c = Context({'link': link})
+            html_message = render_to_string(html_version,c)
             #emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com', [email])
             html_message.content_subtype = "html" 
             #email.send()
