@@ -28,7 +28,7 @@ class CommentsViewSet(APIView):
         # data_request=JSONParser().parse(request) # TODO: mappoint id, (requestuser) text
         serializer = CommentsPostSerializer(data=data)
         if serializer.is_valid():
-            comment = serializer.save()  # author_id=self.request.user.id) #, mappointPin_id=mappoint)
+            comment = serializer.save()  
 
             if comment:
                 json = serializer.data
