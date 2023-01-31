@@ -40,7 +40,7 @@ class ConfirmEmail(APIView):
                 'link': link
                 }
 
-            html_message = loader.render_to_string('templates\confirmationMail.html',context)
+            # html_message = loader.render_to_string('templates\confirmationMail.html',context)
             # temp= 'templates\confirmationMail.html'
             # print(temp)
             # htmlmessage = render_to_string(temp, context)
