@@ -96,6 +96,10 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+
 WSGI_APPLICATION = 'Backend.wsgi.application'
 
 # Database Development #TODO: IN env variablen reinpacken
