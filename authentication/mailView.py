@@ -51,7 +51,7 @@ class ConfirmEmail(APIView):
 
 
             sent_mail = send_mail(  # email senden
-                subject,
+                subject= subject,
                 html_message=htmlmessage,
                 recipient_list=[email],
                 from_email= 'get_outside.cherrytomaten@gmail.com'
