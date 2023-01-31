@@ -3,9 +3,6 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.template.loader import render_to_string, get_template
-from django.core.mail import EmailMessage
-from django.template import Context
 
 
 from authentication.models import CustomUser
