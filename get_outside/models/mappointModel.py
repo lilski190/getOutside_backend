@@ -48,6 +48,7 @@ class Mappoint(models.Model):
 
 class Images(models.Model):
     image = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    cloud_pic = models.CharField(blank=True, max_length=300)
     mappoint = models.ForeignKey('Mappoint',
                                  related_name='image',
                                  on_delete=models.CASCADE, )
