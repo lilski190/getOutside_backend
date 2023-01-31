@@ -7,7 +7,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'profile_picture', 'uuid')
+        fields = ('username', 'cloud_pic', 'uuid')
 
 
 # Serializers define the API representation.

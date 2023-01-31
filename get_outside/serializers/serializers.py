@@ -13,7 +13,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Images
-        fields = ['id', 'image', 'mappoint']
+        fields = ['id', 'image', 'mappoint', 'cloud_pic']
 
 
 class RatingSerializer(serializers.ModelSerializer):
