@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.template.loader import render_to_string 
+from django.template.loader import render_to_string, get_template
 from django.core.mail import EmailMessage
 from django.template import Context
 
@@ -43,8 +43,8 @@ class ConfirmEmail(APIView):
                 'link': link
                 }
 
-            htmlmessage = render_to_string('authentication/templates/confirmationMail.html', context)
-            text = render_to_string('authentication/templates/confirmationMail.txt', context)
+            # htmlmessage = render_to_string('authentication/templates/confirmationMail.html', context)
+            # text = render_to_string('authentication/templates/confirmationMail.txt', context)
            # emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com', [email])
             #emailmessage.content_subtype = "html" 
             
@@ -52,17 +52,22 @@ class ConfirmEmail(APIView):
             #     return Response(status=200)#{'msg': sent_mail}, status=200)
             # else:
             #      return Response(status=400)
-            sent_mail = send_mail(  # email senden
-                subject,
-                message=text,
-                html_message=htmlmessage,
-                recipient_list=[email],
-                from_email= 'get_outside.cherrytomaten@gmail.com'
-             )
-            if sent_mail:
-                 return Response(status=200)#{'msg': sent_mail}, status=200)
-            else:
-                  return Response(status=400)
+            message = get_template('templates/confirmationMail.html').render(Context(context))
+            msg = EmailMessage(subject, message, to=[email], from_email='get_outside.cherrytomaten@gmail.com')
+            msg.content_subtype = 'html'
+            msg.send()
+
+            # sent_mail = send_mail(  # email senden
+            #     subject,
+            #     message=text,
+            #     html_message=htmlmessage,
+            #     recipient_list=[email],
+            #     from_email= 'get_outside.cherrytomaten@gmail.com'
+            #  )
+            # if sent_mail:
+            #      return Response(status=200)#{'msg': sent_mail}, status=200)
+            # else:
+            #       return Response(status=400)
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
            
