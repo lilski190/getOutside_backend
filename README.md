@@ -51,7 +51,26 @@ wenn das nicht funktioniert, kann es helfen mit cd in den Ordner Scripts zu wech
 3. Abhängigkeiten installieren  
 > `pip install -r ./requirements.txt`
 
-4. Um sicherzugehen, dass alle migrations in Ordnung sind:  
+4.1 Datenbank-Einstellung "auswählen":  
+es lässt sich alles über env-Variablen regeln, außer die Einstellung der Datenbank.  
+
+für die Entwicklung (Development) in Backend/settings.py:  
+> 99 `DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3', }}`  
+auskommentieren  
+> 102/103/104 `DATABASES = {
+}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)`  
+kommentieren  
+
+fürs Deployment in Backend/settings.py:  
+> 99 `DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3', }}`  
+kommentieren  
+> 102/103/104 `DATABASES = {
+}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)`  
+auskommentieren
+
+4.2 Um sicherzugehen, dass alle migrations in Ordnung sind:  
 > `python manage.py makemigrations` 
 > `python manage.py migrate` 
 
