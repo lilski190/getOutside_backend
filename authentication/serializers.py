@@ -102,7 +102,9 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
         fields = ('password', 'password2')
 
     def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
+        password = attrs.get('password')
+        password2 = attrs.pop('password2')
+        if password != password2:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return attrs
 
