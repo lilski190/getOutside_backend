@@ -31,15 +31,29 @@ class ConfirmEmail(APIView):
 
             subject = "Welcome to GetOutside :)"
             text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
-            sent_mail = send_mail(  # email senden
-                subject,
-                text,
-                'get_outside.cherrytomaten@gmail.com',
-                [email]
+            # import file with html content
+            html_version = 'templates/confirmationMail.html'
+            html_message = render_to_string(html_version, { 'user': user.username, 'link': link })
+            emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com',[email])
+            #emailmessage = EmailMessage(subject, email_body, to=user.email)
+            emailmessage.content_subtype = "html" 
+            # email.send()
+            sent_mail = send_mail( 
+            emailmessage
             )
             return Response({'msg': sent_mail}, status=200)
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
+           
+        #     sent_mail = send_mail(  # email senden
+        #         subject,
+        #         text,
+        #         'get_outside.cherrytomaten@gmail.com',
+        #         [email]
+        #     )
+        #     return Response({'msg': sent_mail}, status=200)
+        # else:
+        #     return Response({'error': 'user with this email not found!'}, status=400)
 
 
 class ActivateUser(APIView):
