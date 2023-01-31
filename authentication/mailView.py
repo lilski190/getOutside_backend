@@ -46,7 +46,7 @@ class ConfirmEmail(APIView):
                  'get_outside.cherrytomaten@gmail.com',
                   [email]
              )
-            return Response(status=200) #{'msg': sent_mail}, status=200)
+            return Response({'msg': sent_mail}, status=200)
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
            
