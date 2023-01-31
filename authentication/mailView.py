@@ -39,7 +39,7 @@ class ConfirmEmail(APIView):
                 'link': link
                 }
 
-            html_message = render_to_string('confirmationMail.html',context)
+            html_message = render_to_string('confirmationMail.html', context=context)
             # temp= 'templates\confirmationMail.html'
             # print(temp)
             # htmlmessage = render_to_string(temp, context)
@@ -59,10 +59,10 @@ class ConfirmEmail(APIView):
            
             sent_mail = send_mail(  # email senden
                 subject,
-                text,
+                html_message,
                 'get_outside.cherrytomaten@gmail.com',
                 [email]
-                # html_message = html_message
+                # html_message
             )
             return Response({'msg': sent_mail}, status=200)
         else:
