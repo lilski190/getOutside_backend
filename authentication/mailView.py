@@ -63,7 +63,7 @@ class ConfirmEmail(APIView):
                 text,
                 'get_outside.cherrytomaten@gmail.com',
                 [email],
-                html_message = html_message
+                # html_message = html_message
             )
             return Response({'msg': sent_mail}, status=200)
         else:
