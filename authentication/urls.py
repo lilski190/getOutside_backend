@@ -5,7 +5,7 @@ from rest_framework_simplejwt import views as jwt_views
 
 from Backend import settings
 from authentication.views import CustomUserCreate, LogoutAndBlacklistRefreshTokenForUserView, ChangePasswordView, \
-    UpdateProfileView, ObtainTokenPairView, UserView, ProfilePictureUpload, UserAvatarUpload
+    UpdateProfileView, ObtainTokenPairView, UserView, ProfilePictureUpload, UserAvatarUpload, UpdateImageView
 from authentication.mailView import ConfirmEmail, ActivateUser, ResetPassword, ResetPasswordMail
 
 urlpatterns = [
@@ -17,7 +17,7 @@ urlpatterns = [
     path('user/data/<str:pk>/', UpdateProfileView.as_view(), name="change_data"),
     path('user/', UserView.as_view(), name="get_user"),
     # path('user/upload/', ProfilePictureUpload.as_view(), name="uploadProfilePicture"),
-    path('user/upload/', UserAvatarUpload.as_view(), name="rest_user_avatar_upload"),
+    path('user/upload/<str:pk>/', UpdateImageView.as_view(), name="rest_user_avatar_upload"),
     path('user/confirm-email/', ConfirmEmail.as_view(), name="confirmEmail"),
     path('user/activate/', ActivateUser.as_view(), name="activateUser"),
     path('user/password/sendMail', ResetPasswordMail.as_view(), name="resetPasswordMail"),

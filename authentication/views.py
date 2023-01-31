@@ -81,6 +81,12 @@ class UserView(APIView):
         )
 
 
+class UpdateImageView(generics.UpdateAPIView):
+    queryset = CustomUser.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ProfilePictureSerializer
+
+
 '''
 class ProfilePictureUpload(UpdateAPIView):
     queryset = CustomUser.objects.all()

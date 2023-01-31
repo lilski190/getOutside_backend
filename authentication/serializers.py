@@ -158,11 +158,17 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ["profile_picture"]
+        fields = ["cloud_pic"]
 
     def update(self, instance, validated_data):
-        instance.profile_picture = validated_data
+        user = self.context['request'].user
+
+        if user.pk != instance.pk:
+            raise serializers.ValidationError({"authorize": "You dont have permission for this user."})
+
+        instance.cloud_pic = validated_data['cloud_pic']
         instance.save()
+
         return instance
 
 
