@@ -1,2 +1,10 @@
-Thank you for joining getOutside.</p>
+Hello {{ user }},
+Thank you for joining getOutside.
 We’d like to confirm that your account was created successfully. To access your account click the Link below.
+{{link}}
+If you experience any issues logging into your account, reach out to us at
+get.outside.cherrytomaten@gmail.com
+Let’s getOutside together!
+Best,
+The getOutside team
+

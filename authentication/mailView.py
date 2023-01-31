@@ -40,6 +40,7 @@ class ConfirmEmail(APIView):
                 }
 
             html_message = render_to_string('confirmationMail.html', context=context)
+            message = render_to_string('confirmationMail.txt', context=context)
             # temp= 'templates\confirmationMail.html'
             # print(temp)
             # htmlmessage = render_to_string(temp, context)
@@ -56,13 +57,13 @@ class ConfirmEmail(APIView):
         #           return Response(status=400)
         # else:
         #     return Response({'error': 'user with this email not found!'}, status=400)
-           
+            
             sent_mail = send_mail(  # email senden
                 subject,
-                html_message,
+                message,
                 'get_outside.cherrytomaten@gmail.com',
-                [email]
-                # html_message
+                [email],
+                html_message=html_message
             )
             return Response({'msg': sent_mail}, status=200)
         else:
