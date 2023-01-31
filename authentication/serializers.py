@@ -53,7 +53,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    profile_picture = serializers.ImageField()
 
     class Meta:
         model = CustomUser
