@@ -40,11 +40,11 @@ class ConfirmEmail(APIView):
             emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com',[email])
             #emailmessage = EmailMessage(subject, email_body, to=user.email)
             emailmessage.content_subtype = "html" 
-            # email.send()
-            sent_mail = send_mail( 
-            emailmessage
-            )
-            return Response({'msg': sent_mail}, status=200)
+            email.send()
+            # sent_mail = send_mail( 
+            # emailmessage
+            # )
+            return Response(status=200) #{'msg': sent_mail}, status=200)
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
            
