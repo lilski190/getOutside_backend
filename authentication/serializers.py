@@ -158,6 +158,13 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ["profile_picture"]
 
+    def update(self, instance, validated_data):
+        instance.profile_picture = validated_data["profile_picture"]
+        instance.save()
+        return instance
+
+
+
   #  def save(self, *args, **kwargs):
    #     if self.instance.profile_picture:
     #        self.instance.profile_picture.delete()
