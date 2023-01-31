@@ -37,13 +37,15 @@ class ConfirmEmail(APIView):
             # import file with html content
             html_version = 'templates/confirmationMail.html'
             html_message = render_to_string(html_version, { 'user': user.username, 'link': link })
-            emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com',[email])
-            #emailmessage = EmailMessage(subject, email_body, to=user.email)
-            emailmessage.content_subtype = "html" 
-            email.send()
-            # sent_mail = send_mail( 
-            # emailmessage
-            # )
+            #emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com', [email])
+            #emailmessage.content_subtype = "html" 
+            #email.send()
+            sent_mail = send_mail(  # email senden
+                 subject,
+                 html_message,
+                 'get_outside.cherrytomaten@gmail.com',
+                  [email]
+             )
             return Response(status=200) #{'msg': sent_mail}, status=200)
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
