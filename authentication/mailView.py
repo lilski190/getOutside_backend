@@ -41,35 +41,33 @@ class ConfirmEmail(APIView):
                 }
 
             html_message = loader.render_to_string('templates\confirmationMail.html',context)
-
-            
             # temp= 'templates\confirmationMail.html'
             # print(temp)
             # htmlmessage = render_to_string(temp, context)
             # print(htmlmessage)
-            sent_mail = send_mail(  # email senden
-                subject,
-                message="Thank you for joining getOutside.We’d like to confirm that your account was created successfully. To access your account click the Link below.", 
-                recipient_list=[email],
-                from_email= 'get_outside.cherrytomaten@gmail.com',
-                html_message = html_message
-             )
-            if sent_mail:
-                 return Response(status=200)#{'msg': sent_mail}, status=200)
-            else:
-                  return Response(status=400)
-        else:
-            return Response({'error': 'user with this email not found!'}, status=400)
-           
         #     sent_mail = send_mail(  # email senden
         #         subject,
-        #         text,
-        #         'get_outside.cherrytomaten@gmail.com',
-        #         [email]
-        #     )
-        #     return Response({'msg': sent_mail}, status=200)
+        #         recipient_list=[email],
+        #         from_email= 'get_outside.cherrytomaten@gmail.com',
+        #         html_message = html_message
+        #      )
+        #     if sent_mail:
+        #          return Response(status=200)#{'msg': sent_mail}, status=200)
+        #     else:
+        #           return Response(status=400)
         # else:
         #     return Response({'error': 'user with this email not found!'}, status=400)
+           
+            sent_mail = send_mail(  # email senden
+                subject,
+                text,
+                'get_outside.cherrytomaten@gmail.com',
+                [email],
+                html_message = html_message
+            )
+            return Response({'msg': sent_mail}, status=200)
+        else:
+            return Response({'error': 'user with this email not found!'}, status=400)
 
 
 class ActivateUser(APIView):
