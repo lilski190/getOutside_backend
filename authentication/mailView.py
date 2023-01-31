@@ -34,13 +34,13 @@ class ConfirmEmail(APIView):
             subject = "Welcome to GetOutside :)"
             text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
 
-            # context={
-            #     'user': user.username,
-            #     'link': link
-            #     }
+            context={
+                'user': user.username,
+                'link': link
+                }
             
-            # temp= 'templates\confirmationMail.html'
-            # htmlmessage = render_to_string(temp, context)
+            temp= 'templates\confirmationMail.html'
+            htmlmessage = render_to_string(temp, context)
             # emailmessage = EmailMessage(subject, htmlmessage, from_email='get_outside.cherrytomaten@gmail.com', to=[email])
             # emailmessage.content_subtype = "html" 
             # m=emailmessage.send()
@@ -50,29 +50,28 @@ class ConfirmEmail(APIView):
             #       return Response(status=400)
 
 
-            # sent_mail = send_mail(  # email senden
-            #     subject,
-            #     message=text,
-            #     html_message=htmlmessage,
-            #     recipient_list=[email],
-            #     from_email= 'get_outside.cherrytomaten@gmail.com'
-            #  )
-            # if sent_mail:
-            #      return Response(status=200)#{'msg': sent_mail}, status=200)
-            # else:
-            #       return Response(status=400)
-        # else:
-        #     return Response({'error': 'user with this email not found!'}, status=400)
-           
             sent_mail = send_mail(  # email senden
                 subject,
-                text,
-                'get_outside.cherrytomaten@gmail.com',
-                [email]
-            )
-            return Response({'msg': sent_mail}, status=200)
+                html_message=htmlmessage,
+                recipient_list=[email],
+                from_email= 'get_outside.cherrytomaten@gmail.com'
+             )
+            if sent_mail:
+                 return Response(status=200)#{'msg': sent_mail}, status=200)
+            else:
+                  return Response(status=400)
         else:
             return Response({'error': 'user with this email not found!'}, status=400)
+           
+        #     sent_mail = send_mail(  # email senden
+        #         subject,
+        #         text,
+        #         'get_outside.cherrytomaten@gmail.com',
+        #         [email]
+        #     )
+        #     return Response({'msg': sent_mail}, status=200)
+        # else:
+        #     return Response({'error': 'user with this email not found!'}, status=400)
 
 
 class ActivateUser(APIView):
