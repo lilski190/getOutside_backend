@@ -32,32 +32,15 @@ class ConfirmEmail(APIView):
             link = f'{activate_link_url}?user_uuid={user.uuid}&user_mail={email}&confirmation_token={confirmation_token}'  # link erstellen
 
             subject = "Welcome to GetOutside :)"
-            text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
-            
+            # text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
+
             context={
                 'user': user.username,
                 'link': link
                 }
 
             html_message = render_to_string('confirmationMail.html', context=context)
-            message = render_to_string('confirmationMail.txt', context=context)
-            # temp= 'templates\confirmationMail.html'
-            # print(temp)
-            # htmlmessage = render_to_string(temp, context)
-            # print(htmlmessage)
-        #     sent_mail = send_mail(  # email senden
-        #         subject,
-        #         recipient_list=[email],
-        #         from_email= 'get_outside.cherrytomaten@gmail.com',
-        #         html_message = html_message
-        #      )
-        #     if sent_mail:
-        #          return Response(status=200)#{'msg': sent_mail}, status=200)
-        #     else:
-        #           return Response(status=400)
-        # else:
-        #     return Response({'error': 'user with this email not found!'}, status=400)
-            
+            message = render_to_string('confirmationMail.txt', context=context)   
             sent_mail = send_mail(  # email senden
                 subject,
                 message,
