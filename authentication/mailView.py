@@ -43,11 +43,8 @@ class ConfirmEmail(APIView):
                 'link': link
                 }
 
-            message = render_to_string('get_outside/templates/confirmationMail.html', context)
-            if message:
-                return Response(status=200)#{'msg': sent_mail}, status=200)
-            else:
-                  return Response(status=400)
+            message = render_to_string('authentication/templates/confirmationMail.html', context)
+            text = render_to_string('authentication/templates/confirmationMail.txt', context)
            # emailmessage = EmailMessage(subject, html_message,'get_outside.cherrytomaten@gmail.com', [email])
             #emailmessage.content_subtype = "html" 
             
@@ -57,10 +54,10 @@ class ConfirmEmail(APIView):
             #      return Response(status=400)
             sent_mail = send_mail(  # email senden
                 subject,
-                #message=message
-                'get_outside.cherrytomaten@gmail.com',
-                [email],
-                html_message= message
+                message=text,
+                html_message=message,
+                recipient_list=[email],
+                from_email= 'get_outside.cherrytomaten@gmail.com'
              )
             if sent_mail:
                  return Response(status=200)#{'msg': sent_mail}, status=200)
