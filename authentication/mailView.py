@@ -97,7 +97,7 @@ class ResetPasswordMail(APIView):
                 'user': user.username,
                 'link': link
                 }
-            text= f'Hello {user}, use the following link to reset your password:{link} '
+            text= f'Hello {user.username}, use the following link to reset your password:{link} '
             html_message = render_to_string('resetPasswordMail.html', context=context)
             message = render_to_string('resetPasswordMail.txt', context=context)  
             # email senden 
