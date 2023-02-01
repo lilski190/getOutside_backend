@@ -16,8 +16,13 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'mappoint', 'cloud_pic']
 
 
-class RatingSerializer(serializers.ModelSerializer):
+class ImagePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Images
+        fields = ['id', 'mappoint', 'cloud_pic']
 
+
+class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ratings
         fields = '__all__'
@@ -31,7 +36,7 @@ class MappointSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Mappoint
-        fields =  '__all__'
+        fields = '__all__'
 
     def create(self, validated_data):
         return Mappoint.objects.create(**validated_data)
@@ -43,7 +48,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__' 
+        fields = '__all__'
 
     def create(self, validated_data):
         return Category.objects.create(**validated_data)
@@ -55,7 +60,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class UploadImageSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Images
         fields = ["cloud_pic"]
