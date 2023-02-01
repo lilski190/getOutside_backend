@@ -31,7 +31,6 @@ class CategoryViewSet(APIView):
 
     def post(self, request, format="json"):
         data_request = JSONParser().parse(request)
-        #serializer = self.get_serializer(data=request)
         serializer = CategorySerializer(data=data_request)
         if serializer.is_valid():
             category = serializer.save()
@@ -47,10 +46,6 @@ class CategoryViewSet2(APIView):
     def put(self, request, pk , format='json'):
         object = get_object_or_404(Category, pk=pk)
         data_request = JSONParser().parse(request)
-        objects=Category.objects.all()
-        # for object in objects:
-        #     if object.name==objects.name:
-        #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         # Passing partial will allow us to update without passing the entire Todo object
         serializer=CategorySerializer(instance=object, data=data_request, partial=True)
         if serializer.is_valid():

@@ -31,17 +31,16 @@ class ConfirmEmail(APIView):
             print(confirmation_token)
             link = f'{activate_link_url}?user_uuid={user.uuid}&user_mail={email}&confirmation_token={confirmation_token}'  # link erstellen
 
+            #Mail Inhalt rendern
             subject = "Welcome to GetOutside :)"
-            # text = f'Hello {user.username} :) please confirm your email using the following link: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
-
             context={
                 'user': user.username,
                 'link': link
                 }
-
             html_message = render_to_string('confirmationMail.html', context=context)
-            message = render_to_string('confirmationMail.txt', context=context)   
-            sent_mail = send_mail(  # email senden
+            message = render_to_string('confirmationMail.txt', context=context)  
+            # email senden 
+            sent_mail = send_mail(  
                 subject,
                 message,
                 'get_outside.cherrytomaten@gmail.com',
@@ -94,13 +93,26 @@ class ResetPasswordMail(APIView):
             link = f'{activate_link_url}?user_id={user.uuid}&user_mail={email}&confirmation_token={confirmation_token}'  # link erstellen
 
             subject = "Reset Password "
-            text = f'Hello {user.username}, use the following link to reset your password: {link}'  # TODO: email tamplate einbauen, damit die mail schön ausieht
-            sent_mail = send_mail(  # email senden
+            context={
+                'user': user.username,
+                'link': link
+                }
+            html_message = render_to_string('resetPasswordMail.html', context=context)
+            message = render_to_string('resetPasswordMail.txt', context=context)  
+            # email senden 
+            sent_mail = send_mail(  
                 subject,
-                text,
+                message,
                 'get_outside.cherrytomaten@gmail.com',
-                [email]
+                [email],
+                html_message=html_message
             )
+            # sent_mail = send_mail(  
+            #     subject,
+            #     text,
+            #     'get_outside.cherrytomaten@gmail.com',
+            #     [email]
+            # )
             user.is_active = False
             return Response({'msg': sent_mail}, status=200)
         else:
