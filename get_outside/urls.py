@@ -1,5 +1,5 @@
 from django.urls import path
-from get_outside.views.mappointView import MappointViewSet, UploadImage, RatingViewSet, MappointImageView
+from get_outside.views.mappointView import MappointViewSet, RatingViewSet, MappointImageView
 from get_outside.views.categoryView import CategoryViewSet, CategoryViewSet2
 from get_outside.views.favoritesView import FavoritePinView
 from get_outside.views.commentsView import CommentsViewSet
