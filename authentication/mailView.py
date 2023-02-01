@@ -97,22 +97,23 @@ class ResetPasswordMail(APIView):
                 'user': user.username,
                 'link': link
                 }
+            text= f'Hello {user}, use the following link to reset your password:{link} '
             html_message = render_to_string('resetPasswordMail.html', context=context)
             message = render_to_string('resetPasswordMail.txt', context=context)  
             # email senden 
-            sent_mail = send_mail(  
-                subject,
-                message,
-                'get_outside.cherrytomaten@gmail.com',
-                [email],
-                html_message=html_message
-            )
             # sent_mail = send_mail(  
             #     subject,
-            #     text,
+            #     message,
             #     'get_outside.cherrytomaten@gmail.com',
-            #     [email]
+            #     [email],
+            #     html_message=html_message
             # )
+            sent_mail = send_mail(  
+                subject,
+                text,
+                'get_outside.cherrytomaten@gmail.com',
+                [email]
+            )
             user.is_active = False
             return Response({'msg': sent_mail}, status=200)
         else:
