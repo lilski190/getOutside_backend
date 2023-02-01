@@ -73,10 +73,10 @@ class MappointImageView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):  # add pin to list from loggedin user
-        pin_id = request.data.get('pin')  # pin id
+        pin_id = request.data.get('mappoint')  # pin id
         cloud_pic = request.data.get('cloud_pic')
         data = {
-            'pin': pin_id,
+            'mappoint': pin_id,
             'cloud_pic': cloud_pic,
         }
         serializer = ImagePostSerializer(data=data)
@@ -87,7 +87,7 @@ class MappointImageView(APIView):
         return Response(serializer.errors, status=400)
 
     def delete(self, request, *args, **kwargs):  # delete pin from list from loggedin user
-        pin = request.data.get('pin')
+        pin = request.data.get('mappoint')
         cloud_pic = request.data.get('cloud_pic')
         instance = Images.objects.filter(pin=pin, cloud_pic=cloud_pic)
         print(instance)
