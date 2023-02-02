@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from get_outside.models.RatingsModel import Ratings
 from get_outside.models.mappointModel import Images, Mappoint
 from get_outside.serializers.serializers import ImageSerializer, MappointSerializer, RatingSerializer, \
-    UploadImageSerializer
+    UploadImageSerializer, ImagePostSerializer
 
 
 # ViewSets define the view behavior.
@@ -63,11 +63,38 @@ class MappointViewSet(APIView):
             status=status.HTTP_200_OK)
 
 
-class UploadImage(APIView):
-    queryset = Images.objects.all()
+class MappointImageView(APIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = UploadImageSerializer
 
+    def get(self, request, *args, **kwargs):  # get favorite list form loggedin user
+        print('Hallo')
+        img = Images.objects.filter(user=request.user.uuid)  # favorites from that user
+        serializer = ImageSerializer(img, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):  # add pin to list from loggedin user
+        pin_id = request.data.get('mappoint')  # pin id
+        cloud_pic = request.data.get('cloud_pic')
+        data = {
+            'mappoint': pin_id,
+            'cloud_pic': cloud_pic,
+        }
+        serializer = ImagePostSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        print(serializer.errors)
+        return Response(serializer.errors, status=400)
+
+    def delete(self, request, *args, **kwargs):  # delete pin from list from loggedin user
+        pin = request.data.get('mappoint')
+        cloud_pic = request.data.get('cloud_pic')
+        instance = Images.objects.filter(pin=pin, cloud_pic=cloud_pic)
+        print(instance)
+        if not instance:
+            return Response({"res": "Object with id does not exists"}, status=status.HTTP_400_BAD_REQUEST)
+        instance.delete()
+        return Response({"res": "Object deleted!"}, status=status.HTTP_200_OK)
 
 '''
     def post(self, request, pk, *args, **kwargs):
