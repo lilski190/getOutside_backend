@@ -14,7 +14,6 @@ from Backend import settings
 from .models import CustomUser
 from .serializers import CustomUserSerializer, ChangePasswordSerializer, MyTokenObtainPairSerializer, \
     UpdateUserSerializer, UserSerializer, ProfilePictureSerializer
-
 # custom token
 from .token import account_activation_token
 
@@ -87,17 +86,6 @@ class UpdateImageView(generics.UpdateAPIView):
     serializer_class = ProfilePictureSerializer
 
 
-'''
-class ProfilePictureUpload(UpdateAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = ProfilePictureSerializer
-    lookup_field = 'pk'
-
-    def perform_update(self, serializer):
-        serializer.save(profile_picture=self.request.data())
-'''
-
-
 class UserAvatarUpload(APIView):
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [IsAuthenticated]
@@ -117,8 +105,6 @@ class ProfilePictureUpload(APIView):
 
     def post(self, request):
         file = request.data['file']
-        # file = request.FILES['profile_picture']
-
         upload_data = cloudinary.uploader.upload(file)
         return Response({
             'status': 'success',
@@ -138,9 +124,7 @@ class ProfilePictureUpload(APIView):
                 {"res": "User with pk does not exists"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        # file = request.data['file']
         data = {
-            # 'uuid': request.user.uuid,
             'profile_picture': request.data
         }
         serializer = UserSerializer(data=data, partial=True)
@@ -150,19 +134,3 @@ class ProfilePictureUpload(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-'''
-    def delete(self, request, *args, **kwargs):
-        instance = self.get_object()
-
-        if not instance:
-            return Response(
-                {"res": "Object with id does not exists"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        instance.delete()
-        return Response(
-            {"res": "Object deleted!"},
-            status=status.HTTP_200_OK
-        )
-'''

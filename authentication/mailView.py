@@ -58,11 +58,9 @@ class ActivateUser(APIView):
     def get(self, request):
         print('Activate account :)')
         confirmation_token = request.GET.get('confirmation_token')
-        # token = request.data.get('confirmation_token')
         print(confirmation_token)
         user_id = request.data.get('user_id')
         user_mail = request.GET.get('user_mail')
-        # user_id = request.data('user_id')
         print(user_mail)
         try:
             user = CustomUser.objects.get(email=user_mail)
@@ -97,7 +95,6 @@ class ResetPasswordMail(APIView):
                 'user': user.username,
                 'link': link
                 }
-            text= f'Hello {user.username}, use the following link to reset your password:{link} '
             html_message = render_to_string('resetPasswordMail.html', context=context)
             message = render_to_string('resetPasswordMail.txt', context=context)  
             #email senden 
@@ -108,12 +105,6 @@ class ResetPasswordMail(APIView):
                 [email],
                 html_message=html_message
             )
-            # sent_mail = send_mail(  
-            #     subject,
-            #     text,
-            #     'get_outside.cherrytomaten@gmail.com',
-            #     [email]
-            # )
             user.is_active = False
             return Response({'msg': sent_mail}, status=200)
         else:
@@ -125,17 +116,14 @@ class ResetPassword(APIView):
 
     def post(self, request):
         token = request.data.get('confirmation_token')
-        # token = request.data.get('confirmation_token')
         user_id = request.data.get('user_id')
         user_mail = request.data.get('user_mail')
-        # user_id = request.data('user_id')
         try:
             user = CustomUser.objects.get(email=user_mail)
             user.is_active = True
         except CustomUser.DoesNotExist:
             user = None
         if user is not None and account_activation_token.check_token(user, token):
-           # user.is_active = True
             # password change here in serializer, find old password first
             data = {
                 'password': request.data.get('password'),

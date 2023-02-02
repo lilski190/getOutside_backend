@@ -100,7 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Backend.wsgi.application'
 
-# Database Development #TODO: IN env variablen reinpacken
+# Database Development
 # DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': BASE_DIR / 'db.sqlite3', }}
 
 # Database Production

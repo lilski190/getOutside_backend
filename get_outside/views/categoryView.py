@@ -40,16 +40,7 @@ class CategoryViewSet(APIView):
             return get_object_or_404(Category, id=id)
         except Category.DoesNotExist:
             return Response(CategorySerializer.errors, status=status.HTTP_404_NOT_FOUND)
-    '''
-    def get(self, request, pk=None, format=None):
-        if pk:
-            data = self.detail_view(pk)
-            serializer = CategorySerializer(data)
-        else:
-            data = Category.objects.all()
-            serializer = CategorySerializer(data, many=True)
-        return Response(serializer.data)
-    '''
+  
 
     def post(self, request, format="json"):
         data_request = JSONParser().parse(request)
@@ -59,7 +50,6 @@ class CategoryViewSet(APIView):
             if category:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
-            # return Response(json, status=status.HTTP_406_NOT_ACCEPTABLE)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

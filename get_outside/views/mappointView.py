@@ -66,13 +66,15 @@ class MappointViewSet(APIView):
 class MappointImageView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, *args, **kwargs):  # get favorite list form loggedin user
+    # get favorite list form loggedin user
+    def get(self, request, *args, **kwargs):  
         print('Hallo')
         img = Images.objects.filter(user=request.user.uuid)  # favorites from that user
         serializer = ImageSerializer(img, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):  # add pin to list from loggedin user
+ # add pin to list from loggedin user
+    def post(self, request, *args, **kwargs): 
         pin_id = request.data.get('mappoint')  # pin id
         cloud_pic = request.data.get('cloud_pic')
         data = {
@@ -86,7 +88,8 @@ class MappointImageView(APIView):
         print(serializer.errors)
         return Response(serializer.errors, status=400)
 
-    def delete(self, request, *args, **kwargs):  # delete pin from list from loggedin user
+ # delete pin from list from loggedin user
+    def delete(self, request, *args, **kwargs): 
         pin = request.data.get('mappoint')
         cloud_pic = request.data.get('cloud_pic')
         instance = Images.objects.filter(pin=pin, cloud_pic=cloud_pic)
@@ -96,40 +99,6 @@ class MappointImageView(APIView):
         instance.delete()
         return Response({"res": "Object deleted!"}, status=status.HTTP_200_OK)
 
-'''
-    def post(self, request, pk, *args, **kwargs):
-        file = request.data['file']
-        data = {
-            'image': file,
-            'mappoint': pk
-        }
-        serializer = ImageSerializer(data=data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def get_object(self, pk):
-        try:
-            return Images.objects.get(id=pk)
-        except Images.DoesNotExist:
-            return None
-
-    def delete(self, request, pk, *args, **kwargs):
-        instance = self.get_object(pk)
-
-        if not instance:
-            return Response(
-                {"res": "Object with id does not exists"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        instance.delete()
-        return Response(
-            {"res": "Object deleted!"},
-            status=status.HTTP_200_OK
-        )
-'''
-
 
 class RatingViewSet(APIView):
     permission_classes = (IsAuthenticated,)
@@ -137,8 +106,6 @@ class RatingViewSet(APIView):
     def post(self, request, pk, *args, **kwargs):  # pk = mappointid
         object = get_object_or_404(Mappoint, pk=pk)
         # es wird übergeben: rating, mappoint_id und user_id
-        # data_request = JSONParser().parse(request)
-        # pin_id = request.data.get('mappoint')  # pin id
         rating = request.data.get('rating')
         already_exists = Ratings.objects.filter(mappoint=object, creator=request.user)
         if rating > 5 or rating < 0:
@@ -169,16 +136,3 @@ class RatingViewSet(APIView):
                 return None
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-
-
-'''
-    def delete(self, request, pk):
-        # pk = id vom Rating selber
-        rating = get_object_or_404(Ratings, pk=pk)
-        ratingCreator = rating.creator
-        user_id = self.request.user.uuid
-        if user_id == ratingCreator:
-            rating.delete()
-            return Response(status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
-'''

@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-""" from django.contrib.auth.models import User """
 from ..models.categoryModel import Category
 from ..models.mappointModel import Mappoint, Images
 from ..models.RatingsModel import Ratings

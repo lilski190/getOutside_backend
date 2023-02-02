@@ -16,7 +16,6 @@ urlpatterns = [
     path('user/password/<str:pk>/', ChangePasswordView.as_view(), name="change_password"),
     path('user/data/<str:pk>/', UpdateProfileView.as_view(), name="change_data"),
     path('user/', UserView.as_view(), name="get_user"),
-    # path('user/upload/', ProfilePictureUpload.as_view(), name="uploadProfilePicture"),
     path('user/upload/<str:pk>/', UpdateImageView.as_view(), name="rest_user_avatar_upload"),
     path('user/confirm-email/', ConfirmEmail.as_view(), name="confirmEmail"),
     path('user/activate/', ActivateUser.as_view(), name="activateUser"),

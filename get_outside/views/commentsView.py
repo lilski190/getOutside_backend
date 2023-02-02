@@ -20,17 +20,14 @@ class CommentsViewSet(APIView):
     def post(self, request, *args, **kwargs):
         pin_id = request.data.get('mappointID')  # pin id
         text = request.data.get('text')
-        # user = CustomUser.objects.filter(uuid=request.user.uuid)
         data = {
             'mappointPin': pin_id,
             'text': text,
             'author': request.user.uuid,
         }
-        # data_request=JSONParser().parse(request) # TODO: mappoint id, (requestuser) text
         serializer = CommentsPostSerializer(data=data)
         if serializer.is_valid():
-            comment = serializer.save()  # author_id=self.request.user.id) #, mappointPin_id=mappoint)
-
+            comment = serializer.save()  
             if comment:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
