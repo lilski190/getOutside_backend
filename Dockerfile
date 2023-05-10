@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Kopiere den Rest des Codes in das Arbeitsverzeichnis
 COPY . /getOutside_backend/
 
-# Setze die Umgebungsvariable für die Produktionsumgebung (optional)
-ENV DJANGO_SETTINGS_MODULE=myproject.settings.production
+#Sqlite database
+COPY db.sqlite3 /getOutside_backend/
 
 # Führe die Migrationsbefehle aus (optional)
 RUN python manage.py migrate
@@ -23,4 +23,4 @@ RUN python manage.py migrate
 EXPOSE 8000
 
 # Starte den Django-Entwicklungsserver
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "127.0.0.1:8000"]
