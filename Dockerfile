@@ -13,9 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Kopiere den Rest des Codes in das Arbeitsverzeichnis
 COPY . /getOutside_backend/
 
-#Sqlite database
-COPY db.sqlite3 /getOutside_backend/
-
 # Führe die Migrationsbefehle aus (optional)
 RUN python manage.py migrate
 
