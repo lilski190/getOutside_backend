@@ -13,9 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Kopiere den Rest des Codes in das Arbeitsverzeichnis
 COPY . /getOutside_backend/
 
-# Führe die Migrationsbefehle aus (optional)
-RUN python manage.py migrate
-
 # Öffne den Port, den die Django-Anwendung verwendet
 EXPOSE 8000
 
