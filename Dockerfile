@@ -13,10 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Kopiere den Rest des Codes in das Arbeitsverzeichnis
 COPY . /getOutside_backend/
 
-#Sqlite database
-COPY db.sqlite3 /getOutside_backend/
-
-
 # Setze die Umgebungsvariable für die Produktionsumgebung (optional)
 ENV DJANGO_SETTINGS_MODULE=myproject.settings.production
 
