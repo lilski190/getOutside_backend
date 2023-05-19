@@ -6,3 +6,15 @@ services:
       - .:/getOutside_backend
     ports:
       - "8000:8000"
+    depends_on:
+      - migration
+  migration:
+    build: .
+    command: python manage.py migrate
+    volumes:
+      - .:/getOutside_backend
+  loaddata:
+    build: .
+    command: python manage.py loaddata data/User.json data/Category.json data/Mappoint.json data/Comment.json data/Ratings.json data/FavoritePins.json
+    volumes:
+      - .:/getOutside_backend
