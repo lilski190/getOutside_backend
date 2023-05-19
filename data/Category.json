@@ -2,54 +2,67 @@
 [
   {
       "model": "get_outside.Category",
-        "pk": "volleyball"
+        "pk": "volleyball",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "soccer"
+        "pk": "soccer",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "cycling"
+        "pk": "cycling",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "running"
+        "pk": "running",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "climbing"
+        "pk": "climbing",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "golf"
+        "pk": "golf",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "parkour"
+        "pk": "parkour",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "tennis"
+        "pk": "tennis",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "dancing"
+        "pk": "dancing",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "yoga"
+        "pk": "yoga",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "swimming"
+        "pk": "swimming",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "skating"
+        "pk": "skating",
+        "fields" : {}
   },
   {
       "model": "get_outside.Category",
-        "pk": "basketball"
+        "pk": "basketball",
+        "fields" : {}
   }
 ]

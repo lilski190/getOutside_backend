@@ -9,11 +9,12 @@ WORKDIR /getOutside_backend
 # Kopiere die Anforderungen in das Arbeitsverzeichnis
 COPY requirements.txt /getOutside_backend/
 
+# Kopiere den Rest des Codes in das Arbeitsverzeichnis
+ADD . /getOutside_backend/
+
 # Installiere die Anforderungen
 RUN pip install -r requirements.txt
 
-# Kopiere den Rest des Codes in das Arbeitsverzeichnis
-COPY . /getOutside_backend/
 
 # Öffne den Port, den die Django-Anwendung verwendet
 #EXPOSE 8000

@@ -6,4 +6,3 @@ services:
       - .:/getOutside_backend
     ports:
       - "8000:8000"
-
