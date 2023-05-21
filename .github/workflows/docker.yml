@@ -1,4 +1,4 @@
-name: Docker Build
+name: Docker Build and Run
 
 on:
   push:
@@ -14,5 +14,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag django-api:$(date +%s)
 
-    - name: Start containers
-      run: docker-compose -f "docker-compose.yml" up -d --build
+    - name: Run docker compose
+      run: docker compose up
